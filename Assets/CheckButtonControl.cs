@@ -45,11 +45,16 @@ public class CheckButtonControl : MonoBehaviour {
 		//      string telno = "0729883121"; // registered
 		//      string telno = "0729883120"; // not registered
 		string telno = IFtelno.text;
-		string url = "http://www.jpcaller.com/phone/";
-		
+
 		// remove "-" from telno
 		telno = removeHyphen (telno);
+
+		if (telbook.ContainsKey (telno)) {
+			IFinfo.text = "dic:" + telbook[telno];
+			yield break;
+		}
 		
+		string url = "http://www.jpcaller.com/phone/";
 		WWW web = new WWW(url + telno);
 		yield return web;
 		
@@ -61,7 +66,7 @@ public class CheckButtonControl : MonoBehaviour {
 			res = getHospitalName(web.text.Substring(pos, 40), telno);
 			resText.text = res;
 			if (hasObtainedTelNo(res)) {
-				IFinfo.text = resText.text;
+				IFinfo.text = "web:" + resText.text;
 				addDictionary(telno, resText.text);
 			}
 		}
@@ -75,7 +80,7 @@ public class CheckButtonControl : MonoBehaviour {
 //		var res = telbook ["012345678"];
 //		Debug.Log (res);
 	}
-
+	
 	public void CheckButtonOnClick() {
 //		testDic ();
 		StartCoroutine("checkHospitalTelephoneNumber");
