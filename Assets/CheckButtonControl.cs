@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Linq; // for Where
+using System.Collections.Generic;
 
 public class CheckButtonControl : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class CheckButtonControl : MonoBehaviour {
 	public const string kTitle = "<title>";
 	public InputField IFtelno;
 	public InputField IFinfo;
+
+	private Dictionary<string,string> telbook = new Dictionary<string, string>();
 
 	void Start() {
 		IFtelno.text = "0729883121"; // TODO: remove
@@ -52,21 +55,29 @@ public class CheckButtonControl : MonoBehaviour {
 		
 		string res = web.text;
 		int pos = res.IndexOf (kTitle);
+		resText.text = "not found";
+		IFinfo.text = "";
 		if (pos > 0) {
 			res = getHospitalName(web.text.Substring(pos, 40), telno);
 			resText.text = res;
 			if (hasObtainedTelNo(res)) {
 				IFinfo.text = resText.text;
-			} else {
-				IFinfo.text = "";
+				addDictionary(telno, resText.text);
 			}
-		} else {
-			resText.text = "not found";
-			IFinfo.text = "";
 		}
 	}
 	
-	public void OnClick() {
+	void addDictionary(string telno, string name) {
+		if (telbook.ContainsKey (telno) == false) {
+			telbook.Add (telno, name);
+			Debug.Log("added");
+		}
+//		var res = telbook ["012345678"];
+//		Debug.Log (res);
+	}
+
+	public void CheckButtonOnClick() {
+//		testDic ();
 		StartCoroutine("checkHospitalTelephoneNumber");
 	}
 }

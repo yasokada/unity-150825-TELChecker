@@ -827,7 +827,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1664547308}
-        m_MethodName: OnClick
+        m_MethodName: CheckButtonOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -878,7 +878,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resText: {fileID: 2064342050}
-  telnoIF: {fileID: 1435880438}
+  IFtelno: {fileID: 1435880438}
+  IFinfo: {fileID: 1224479185}
 --- !u!1 &1847856498
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,7 +1144,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: New Text
