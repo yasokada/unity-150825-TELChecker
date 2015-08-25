@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Linq; // for Where
 using System.Collections.Generic;
+using System; // for StringSplitOptions.RemoveEmptyEntries
 
 public class CheckButtonControl : MonoBehaviour {
 
@@ -62,7 +63,7 @@ public class CheckButtonControl : MonoBehaviour {
 		IFinfo.text = "";
 		if (pos > 0) {
 			res = getHospitalName(web.text.Substring(pos, 40), telno);
-			resText.text = res;
+			resText.text = extractCsvRow(res, 0);
 			if (hasObtainedTelNo(res)) {
 				IFinfo.text = resText.text;
 			}
@@ -83,5 +84,16 @@ public class CheckButtonControl : MonoBehaviour {
 	public void AddButtonOnClick() {
 		string telno = removeHyphen (IFtelno.text);
 		addDictionary (telno, IFinfo.text);
+	}
+
+	private string extractCsvRow(string src, int idx)
+	{
+		string[] splitted = src.Split(new string[] { System.Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
+		string res = "";
+		foreach(string each in splitted) {
+			string [] elements = each.Split(' ');
+			res = res + elements[idx] + System.Environment.NewLine;
+		}
+		return res;
 	}
 }
