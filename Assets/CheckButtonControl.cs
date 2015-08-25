@@ -67,7 +67,7 @@ public class CheckButtonControl : MonoBehaviour {
 			resText.text = res;
 			if (hasObtainedTelNo(res)) {
 				IFinfo.text = "web:" + resText.text;
-				addDictionary(telno, resText.text);
+//				addDictionary(telno, resText.text);
 			}
 		}
 	}
@@ -77,12 +77,14 @@ public class CheckButtonControl : MonoBehaviour {
 			telbook.Add (telno, name);
 			Debug.Log("added");
 		}
-//		var res = telbook ["012345678"];
-//		Debug.Log (res);
 	}
 	
 	public void CheckButtonOnClick() {
-//		testDic ();
 		StartCoroutine("checkHospitalTelephoneNumber");
+	}
+
+	public void AddButtonOnClick() {
+		string telno = removeHyphen (IFtelno.text);
+		addDictionary (telno, IFinfo.text);
 	}
 }
