@@ -5,6 +5,12 @@ using System.Linq; // for Where
 using System.Collections.Generic;
 using System; // for StringSplitOptions.RemoveEmptyEntries
 
+/*
+ * V0.1 2015/08/26
+ *   add dictionary export/import feature
+ *   add web search / dictionary search feature
+ */
+
 public class CheckButtonControl : MonoBehaviour {
 
 	public const string kTitle = "<title>";
@@ -116,7 +122,7 @@ public class CheckButtonControl : MonoBehaviour {
 				return "";
 			}
 			int pos = src.IndexOf(System.Environment.NewLine);
-			return src.Substring(0, pos - 1);
+			return src.Substring(0, pos);
 		}
 		return src;
 	}
@@ -152,7 +158,7 @@ public class CheckButtonControl : MonoBehaviour {
 			}
 			telbook.Add(key, value);
 		}
-		int nop = 1;
+//		int nop = 1; // TODO: remove
 	}
 	
 }
