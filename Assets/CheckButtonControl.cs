@@ -6,15 +6,15 @@ using System.Collections.Generic;
 
 public class CheckButtonControl : MonoBehaviour {
 
-	public Text resText;
 	public const string kTitle = "<title>";
-	public InputField IFtelno;
-	public InputField IFinfo;
+	public Text resText; // to show check result
+	public InputField IFtelno; // for input telephone number
+	public InputField IFinfo; // to show/input hospital name
 
 	static private Dictionary<string,string> telbook = new Dictionary<string, string>();
 	
 	void Start() {
-		IFtelno.text = "0729883121"; // TODO: remove
+		IFtelno.text = "0729883121"; // TODO: remove // for test
 	}
 
 	string getHospitalName(string txt, string telno) {
@@ -42,8 +42,6 @@ public class CheckButtonControl : MonoBehaviour {
 	}
 
 	IEnumerator checkHospitalTelephoneNumber() {
-		//      string telno = "0729883121"; // registered
-		//      string telno = "0729883120"; // not registered
 		string telno = IFtelno.text;
 
 		// remove "-" from telno
@@ -66,7 +64,7 @@ public class CheckButtonControl : MonoBehaviour {
 			res = getHospitalName(web.text.Substring(pos, 40), telno);
 			resText.text = res;
 			if (hasObtainedTelNo(res)) {
-				IFinfo.text = "web:" + resText.text;
+				IFinfo.text = resText.text;
 			}
 		}
 	}
