@@ -7,7 +7,12 @@ public class CheckButtonControl : MonoBehaviour {
 
 	public Text resText;
 	public const string kTitle = "<title>";
-	public InputField telnoIF;
+	public InputField IFtelno;
+	public InputField IFinfo;
+
+	void Start() {
+		IFtelno.text = "0729883121"; // TODO: remove
+	}
 
 	string getHospitalName(string txt, string telno) {
 		string removed = txt.Substring (kTitle.Length, 30);
@@ -29,7 +34,7 @@ public class CheckButtonControl : MonoBehaviour {
 	IEnumerator checkHospitalTelephoneNumber() {
 		//      string telno = "0729883121"; // registered
 		//      string telno = "0729883120"; // not registered
-		string telno = telnoIF.text;
+		string telno = IFtelno.text;
 		string url = "http://www.jpcaller.com/phone/";
 		
 		// remove "-" from telno
@@ -41,7 +46,11 @@ public class CheckButtonControl : MonoBehaviour {
 		string res = web.text;
 		int pos = res.IndexOf (kTitle);
 		if (pos > 0) {
-			resText.text = getHospitalName(web.text.Substring(pos, 40), telno);
+			res = getHospitalName(web.text.Substring(pos, 40), telno);
+			resText.text = res;
+			if (res.Contains("not") == false) {
+				IFinfo.text = resText.text;
+			}
 		} else {
 			resText.text = "not found";
 		}
