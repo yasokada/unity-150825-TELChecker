@@ -14,7 +14,7 @@ public class CheckButtonControl : MonoBehaviour {
 
 	public const string kDicFile = "telbook.txt";
 	static private Dictionary<string,string> telbook = new Dictionary<string, string>();
-	private bool justStarted = true;
+	static private bool justStarted = true;
 	
 	void Start() {
 		IFtelno.text = "0729883121"; // TODO: remove // for test
@@ -112,6 +112,9 @@ public class CheckButtonControl : MonoBehaviour {
 
 	string removeNewLine(string src) {
 		if (src.Contains (System.Environment.NewLine)) {
+			if (src.Length <= 1) {
+				return "";
+			}
 			int pos = src.IndexOf(System.Environment.NewLine);
 			return src.Substring(0, pos - 1);
 		}
@@ -140,8 +143,16 @@ public class CheckButtonControl : MonoBehaviour {
 		foreach(string eachline in splitted) {
 			key = extractCsvRow(eachline, 0, /* spaceDiv=*/false);
 			value = extractCsvRow(eachline, 1, /* spaceDiv=*/false);
+
+			key = removeNewLine(key);
+			value = removeNewLine(value);
+
+			if (value.Length == 0) {
+				continue;
+			}
 			telbook.Add(key, value);
 		}
+		int nop = 1;
 	}
 	
 }
