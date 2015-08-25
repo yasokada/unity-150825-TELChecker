@@ -30,7 +30,14 @@ public class CheckButtonControl : MonoBehaviour {
 		var dst = new string (src.Where (c => !"-".Contains (c)).ToArray ());
 		return dst;
 	}
-	
+
+	bool hasObtainedTelNo(string src) {
+		if (src.ToLower ().Contains ("not")) {
+			return false;
+		}
+		return true;
+	}
+
 	IEnumerator checkHospitalTelephoneNumber() {
 		//      string telno = "0729883121"; // registered
 		//      string telno = "0729883120"; // not registered
@@ -48,11 +55,14 @@ public class CheckButtonControl : MonoBehaviour {
 		if (pos > 0) {
 			res = getHospitalName(web.text.Substring(pos, 40), telno);
 			resText.text = res;
-			if (res.Contains("not") == false) {
+			if (hasObtainedTelNo(res)) {
 				IFinfo.text = resText.text;
+			} else {
+				IFinfo.text = "";
 			}
 		} else {
 			resText.text = "not found";
+			IFinfo.text = "";
 		}
 	}
 	
