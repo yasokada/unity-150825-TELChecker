@@ -11,7 +11,10 @@ public class CheckButtonControl : MonoBehaviour {
 	public InputField IFtelno;
 	public InputField IFinfo;
 
-	private Dictionary<string,string> telbook = new Dictionary<string, string>();
+	public Dictionary<string,string> telbook = new Dictionary<string, string>();
+
+	// TODO: 
+	// telbook cannot be shared between B_check and B_add
 
 	void Start() {
 		IFtelno.text = "0729883121"; // TODO: remove
