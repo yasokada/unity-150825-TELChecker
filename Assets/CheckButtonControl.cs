@@ -12,7 +12,9 @@ public class CheckButtonControl : MonoBehaviour {
 	public InputField IFtelno; // for input telephone number
 	public InputField IFinfo; // to show/input hospital name
 
+	public const string kDicFile = "telbook.txt";
 	static private Dictionary<string,string> telbook = new Dictionary<string, string>();
+	private bool justStarted = true;
 	
 	void Start() {
 		IFtelno.text = "0729883121"; // TODO: remove // for test
@@ -63,7 +65,7 @@ public class CheckButtonControl : MonoBehaviour {
 		IFinfo.text = "";
 		if (pos > 0) {
 			res = getHospitalName(web.text.Substring(pos, 40), telno);
-			resText.text = extractCsvRow(res, 0);
+			resText.text = extractCsvRow(res, 0, /* spaceDiv=*/true);
 			if (hasObtainedTelNo(res)) {
 				IFinfo.text = resText.text;
 			}
@@ -78,22 +80,68 @@ public class CheckButtonControl : MonoBehaviour {
 	}
 	
 	public void CheckButtonOnClick() {
+		if (justStarted) {
+			justStarted = false;
+			file_import();
+		}
 		StartCoroutine("checkHospitalTelephoneNumber");
 	}
 
 	public void AddButtonOnClick() {
 		string telno = removeHyphen (IFtelno.text);
 		addDictionary (telno, IFinfo.text);
+
+		file_export (); // TODO: remove // for test
 	}
 
-	private string extractCsvRow(string src, int idx)
+	private string extractCsvRow(string src, int idx, bool spaceDiv)
 	{
 		string[] splitted = src.Split(new string[] { System.Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
 		string res = "";
 		foreach(string each in splitted) {
-			string [] elements = each.Split(' ');
-			res = res + elements[idx] + System.Environment.NewLine;
+			if (spaceDiv) {
+				string [] elements = each.Split(' ');
+				res = res + elements[idx] + System.Environment.NewLine;
+			} else {
+				string [] elements = each.Split(',');
+				res = res + elements[idx] + System.Environment.NewLine;
+			}
 		}
 		return res;
 	}
+
+	string removeNewLine(string src) {
+		if (src.Contains (System.Environment.NewLine)) {
+			int pos = src.IndexOf(System.Environment.NewLine);
+			return src.Substring(0, pos - 1);
+		}
+		return src;
+	}
+
+	public void file_export()
+	{
+		string line = "";
+		string value;
+		foreach (KeyValuePair<string, string> pair in telbook) {
+			value = removeNewLine(pair.Value);
+			line = line + pair.Key + "," + value + System.Environment.NewLine;
+		}
+		System.IO.File.WriteAllText (kDicFile, line);
+	}
+
+	public void file_import()
+	{
+		string line = System.IO.File.ReadAllText (kDicFile);
+
+		string[] splitted = line.Split(new string[] { System.Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
+		string res = "";
+		string key;
+		string value;
+		foreach(string eachline in splitted) {
+			key = extractCsvRow(eachline, 0, /* spaceDiv=*/false);
+			value = extractCsvRow(eachline, 1, /* spaceDiv=*/false);
+			telbook.Add(key, value);
+		}
+	}
+	
 }
