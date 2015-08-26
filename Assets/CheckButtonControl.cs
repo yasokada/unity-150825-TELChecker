@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System; // for StringSplitOptions.RemoveEmptyEntries
 
 /*
+ * V0.2 
+ *   exec file_import() on Start() not on CheckButtonOnClick()
  * V0.1 2015/08/26
  *   add dictionary export/import feature
  *   add web search / dictionary search feature
@@ -24,6 +26,11 @@ public class CheckButtonControl : MonoBehaviour {
 	
 	void Start() {
 		IFtelno.text = "0729883121"; // TODO: remove // for test
+
+		if (justStarted) {
+			justStarted = false;
+			file_import();
+		}
 	}
 
 	string getHospitalName(string txt, string telno) {
@@ -86,10 +93,6 @@ public class CheckButtonControl : MonoBehaviour {
 	}
 	
 	public void CheckButtonOnClick() {
-		if (justStarted) {
-			justStarted = false;
-			file_import();
-		}
 		StartCoroutine("checkHospitalTelephoneNumber");
 	}
 
@@ -97,7 +100,7 @@ public class CheckButtonControl : MonoBehaviour {
 		string telno = removeHyphen (IFtelno.text);
 		addDictionary (telno, IFinfo.text);
 
-		file_export (); // TODO: remove // for test
+		file_export ();
 	}
 
 	private string extractCsvRow(string src, int idx, bool spaceDiv)
@@ -158,7 +161,6 @@ public class CheckButtonControl : MonoBehaviour {
 			}
 			telbook.Add(key, value);
 		}
-//		int nop = 1; // TODO: remove
 	}
 	
 }
