@@ -83,9 +83,11 @@ public class CheckButtonControl : MonoBehaviour {
 		IFinfo.text = "";
 		if (pos > 0) {
 			res = getHospitalName(web.text.Substring(pos, 40), telno);
-			resText.text = extractCsvRow(res, 0, /* spaceDiv=*/true);
 			if (hasObtainedTelNo(res)) {
+				resText.text = extractCsvRow(res, 0, /* spaceDiv=*/true);
 				IFinfo.text = resText.text;
+			} else {
+				resText.text = res;
 			}
 		}
 	}
