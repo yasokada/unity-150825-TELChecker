@@ -37,6 +37,10 @@ public class CheckButtonControl : MonoBehaviour {
 		}
 	}
 
+	bool isRunningOnAndroid() {
+		return (Application.platform == RuntimePlatform.Android);
+	}
+
 	string getHospitalName(string txt, string telno) {
 		string removed = txt.Substring (kTitle.Length, 30);
 		
