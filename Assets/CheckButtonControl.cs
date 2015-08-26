@@ -44,7 +44,7 @@ public class CheckButtonControl : MonoBehaviour {
 		string lhs = removed.Substring (0, 2);
 		string rhs = telno.Substring (0, 2);
 		if (lhs.Equals (rhs)) {
-			return "not registered";
+			return "not registered(未登録です)";
 		}
 		return removed;
 	}
@@ -68,7 +68,7 @@ public class CheckButtonControl : MonoBehaviour {
 		telno = removeHyphen (telno);
 
 		if (telbook.ContainsKey (telno)) {
-			resText.text = "found on the dictionary";
+			resText.text = "登録済です";
 			IFinfo.text = telbook[telno];
 			yield break;
 		}
@@ -79,7 +79,7 @@ public class CheckButtonControl : MonoBehaviour {
 		
 		string res = web.text;
 		int pos = res.IndexOf (kTitle);
-		resText.text = "not found";
+		resText.text = "not found(見つかりません)";
 		IFinfo.text = "";
 		if (pos > 0) {
 			res = getHospitalName(web.text.Substring(pos, 40), telno);
