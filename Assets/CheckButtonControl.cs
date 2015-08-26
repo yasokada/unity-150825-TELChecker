@@ -25,7 +25,7 @@ public class CheckButtonControl : MonoBehaviour {
 	static private bool justStarted = true;
 	
 	void Start() {
-		IFtelno.text = "0729883121"; // TODO: remove // for test
+		IFtelno.text = "072-988-3121"; // TODO: remove // for test
 
 		if (justStarted) {
 			justStarted = false;
@@ -64,7 +64,8 @@ public class CheckButtonControl : MonoBehaviour {
 		telno = removeHyphen (telno);
 
 		if (telbook.ContainsKey (telno)) {
-			IFinfo.text = "dic:" + telbook[telno];
+			resText.text = "found on the dictionary";
+			IFinfo.text = telbook[telno];
 			yield break;
 		}
 		
