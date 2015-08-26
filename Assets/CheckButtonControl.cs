@@ -146,7 +146,6 @@ public class CheckButtonControl : MonoBehaviour {
 		string line = System.IO.File.ReadAllText (kDicFile);
 
 		string[] splitted = line.Split(new string[] { System.Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
-		string res = "";
 		string key;
 		string value;
 		foreach(string eachline in splitted) {
