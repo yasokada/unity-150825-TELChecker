@@ -16,7 +16,10 @@ using System; // for StringSplitOptions.RemoveEmptyEntries
 public class CheckButtonControl : MonoBehaviour {
 
 	public const string kTitle = "<title>";
+	public const string kVersion = "TELChecker V0.2";
+
 	public Text resText; // to show check result
+	public Text verText; // to show version info 
 	public InputField IFtelno; // for input telephone number
 	public InputField IFinfo; // to show/input hospital name
 
@@ -30,6 +33,7 @@ public class CheckButtonControl : MonoBehaviour {
 		if (justStarted) {
 			justStarted = false;
 			file_import();
+			verText.text = kVersion;
 		}
 	}
 
