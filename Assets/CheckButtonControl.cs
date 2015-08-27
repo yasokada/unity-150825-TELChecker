@@ -20,6 +20,7 @@ public class CheckButtonControl : MonoBehaviour {
 
 	public const string kTitle = "<title>";
 	public const string kVersion = "TELChecker V0.2";
+	public const string kClearPassword = "797979";
 
 	public Text resText; // to show check result
 	public Text verText; // to show version info
@@ -115,6 +116,11 @@ public class CheckButtonControl : MonoBehaviour {
 			statusText.text = IFinfo.text + " は登録済みです";			
 		}
 	}
+	void clearDictionary() {
+		Debug.Log ("Clear dictionary");
+		telbook.Clear();
+		statusText.text = "辞書をクリアしました。";
+	}
 	
 	public void CheckButtonOnClick() {
 		statusText.text = "";
@@ -124,8 +130,12 @@ public class CheckButtonControl : MonoBehaviour {
 	public void AddButtonOnClick() {
 		string telno = removeHyphen (IFtelno.text);
 		string info = removeSpace(IFinfo.text);
-		addDictionary (telno, info);
 
+		if (info != kClearPassword) {
+			addDictionary (telno, info);
+		} else {
+			clearDictionary();
+		}
 		file_export ();
 	}
 

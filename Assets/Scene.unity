@@ -146,7 +146,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Check TEL no
+  m_Text: "\u78BA\u8A8D"
 --- !u!222 &83634208
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -550,7 +550,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Add TEL no
+  m_Text: "\u8F9E\u66F8\u767B\u9332"
 --- !u!222 &913431713
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1007,6 +1007,7 @@ GameObject:
   - 92: {fileID: 1650524031}
   - 124: {fileID: 1650524030}
   - 81: {fileID: 1650524029}
+  - 114: {fileID: 1650524034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1080,6 +1081,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1650524034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1650524028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 739a099a5966642b6b13cca687883efe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myButton: {fileID: 1664547305}
 --- !u!1 &1664547303
 GameObject:
   m_ObjectHideFlags: 0
