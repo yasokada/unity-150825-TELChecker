@@ -19,7 +19,8 @@ public class CheckButtonControl : MonoBehaviour {
 	public const string kVersion = "TELChecker V0.2";
 
 	public Text resText; // to show check result
-	public Text verText; // to show version info 
+	public Text verText; // to show version info
+	public Text statusText; // to show result of action
 	public InputField IFtelno; // for input telephone number
 	public InputField IFinfo; // to show/input hospital name
 
@@ -34,6 +35,8 @@ public class CheckButtonControl : MonoBehaviour {
 			justStarted = false;
 			file_import();
 			verText.text = kVersion;
+			resText.text = "";
+			statusText.text = "";
 		}
 	}
 
@@ -100,10 +103,14 @@ public class CheckButtonControl : MonoBehaviour {
 		if (telbook.ContainsKey (telno) == false) {
 			telbook.Add (telno, name);
 			Debug.Log("added");
+			statusText.text = IFinfo.text + " を追加しました";
+		} else {
+			statusText.text = IFinfo.text + " は登録済みです";			
 		}
 	}
 	
 	public void CheckButtonOnClick() {
+		statusText.text = "";
 		StartCoroutine("checkHospitalTelephoneNumber");
 	}
 
