@@ -63,6 +63,10 @@ public class CheckButtonControl : MonoBehaviour {
 		var dst = new string (src.Where (c => !"-".Contains (c)).ToArray ());
 		return dst;
 	}
+	string removeSpace(string src) {
+		var dst = new string (src.Where (c => !" ".Contains (c)).ToArray ());
+		return dst;
+	}
 
 	bool hasObtainedTelNo(string src) {
 		if (src.ToLower ().Contains ("not")) {
@@ -119,7 +123,8 @@ public class CheckButtonControl : MonoBehaviour {
 
 	public void AddButtonOnClick() {
 		string telno = removeHyphen (IFtelno.text);
-		addDictionary (telno, IFinfo.text);
+		string info = removeSpace(IFinfo.text);
+		addDictionary (telno, info);
 
 		file_export ();
 	}
