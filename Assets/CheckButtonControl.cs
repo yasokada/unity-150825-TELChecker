@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System; // for StringSplitOptions.RemoveEmptyEntries
 
 /*
+ * V0.4
+ *   add update info feature
  * V0.3 2015/08/27
  *   add dictionary clear feature
  *   fix file save/load for android
@@ -114,7 +116,9 @@ public class CheckButtonControl : MonoBehaviour {
 			Debug.Log("added");
 			statusText.text = IFinfo.text + " を追加しました";
 		} else {
-			statusText.text = IFinfo.text + " は登録済みです";			
+			telbook.Remove(telno);
+			telbook.Add (telno, name);
+			statusText.text = IFinfo.text + " を更新しました";
 		}
 	}
 	void clearDictionary() {
