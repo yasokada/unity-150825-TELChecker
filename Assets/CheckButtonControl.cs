@@ -6,7 +6,10 @@ using System.Collections.Generic;
 using System; // for StringSplitOptions.RemoveEmptyEntries
 
 /*
- * V0.2 
+ * V0.3 2015/08/27
+ *   fix file save/load for android
+ *   add ScreenSizeKeeper for android
+ * V0.2 2015/08/27
  *   exec file_import() on Start() not on CheckButtonOnClick()
  * V0.1 2015/08/26
  *   add dictionary export/import feature
