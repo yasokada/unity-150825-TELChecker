@@ -7,6 +7,7 @@ using System; // for StringSplitOptions.RemoveEmptyEntries
 
 /*
  * V0.3 2015/08/27
+ *   add dictionary clear feature
  *   fix file save/load for android
  *   add ScreenSizeKeeper for android
  * V0.2 2015/08/27
@@ -19,7 +20,7 @@ using System; // for StringSplitOptions.RemoveEmptyEntries
 public class CheckButtonControl : MonoBehaviour {
 
 	public const string kTitle = "<title>";
-	public const string kVersion = "TELChecker V0.2";
+	public const string kVersion = "TELChecker V0.3";
 	public const string kClearPassword = "797979";
 
 	public Text resText; // to show check result
