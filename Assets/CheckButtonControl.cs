@@ -156,12 +156,12 @@ public class CheckButtonControl : MonoBehaviour {
 			value = removeNewLine(pair.Value);
 			line = line + pair.Key + "," + value + System.Environment.NewLine;
 		}
-		System.IO.File.WriteAllText (kDicFile, line);
+		System.IO.File.WriteAllText (getFileName(kDicFile), line);
 	}
 
 	public void file_import()
 	{
-		string line = System.IO.File.ReadAllText (kDicFile);
+		string line = System.IO.File.ReadAllText ( getFileName(kDicFile) );
 
 		string[] splitted = line.Split(new string[] { System.Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
 		string key;
@@ -178,6 +178,13 @@ public class CheckButtonControl : MonoBehaviour {
 			}
 			telbook.Add(key, value);
 		}
+	}
+
+	string getFileName(string baseName) {
+		if ( isRunningOnAndroid () ) {
+			return Application.persistentDataPath + "/" + baseName;
+		}
+		return baseName;
 	}
 	
 }
